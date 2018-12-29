@@ -1,0 +1,25 @@
+1) mudstv0xifinder:
+The codes for K0s, Lambda, from MuDst.
+To compile, use 'starver SL16k_embed', 'cons'.
+To submit the jobs, first create directories "batch", "log", "output", 
+then use 'star-submit Scheduler.xml', the "output" directory contains the picodst.root files for further offline analysis.
+
+2) offlinecut:
+The code for applying further offline cuts for K0s/Lambda on the picodst.root, and filling invariant mass histograms.
+To run it, one needs to first generate the list of the picodst.root files, for example, the 'finished_ks.list/finished_ksrot.list' for K0s,
+then 'starver SL16k_embed', 'cons' to compile the code under StRoot (for StRefMultCorr), finally use './runcuts.sh ks' to run the 'cuts_ks_cut0.C' script. The code for Lambda is 'cuts_la_cut0.C',  use './runcuts.sh la' to run them. The output is the histogram root files under 'output' directory.(cut0 is only for rapidly bin -1.75 to -1.5, one need to change the rapidity bin i.e. 0.25unit to get the spectra at other rapidity bins)
+one should run them one after another.
+
+
+3) embedpicocut:
+To estimate the efficiency, one need to get the embedding. It will generate the 'k0sfp_100_114.pico.list' for K0s flat pT sample and 'k0sexp_100_111.pico.list' for K0s exp. pT sample. 
+use './runcuts.sh ks' to run the 'cuts_ks_cut0.C' script. The code for Lambda is 'cuts_la_cut0.C', use './runcuts.sh la' to run them to calculate the efficiency. 
+The output is the .txt files under 'output' directory.(cut0 is only for rapidly bin -1.75 to -1.5, one need to change the rapidity bin i.e. 0.25unit to get the spectra at other rapidity bins)
+
+4) spectra:
+'ks' directory is the code for Ks, one needs to download both the histo.root (from step 2) and weight*txt (from step 4) to 'output' subdirectory. The script 'draws_ks_cut0.C' is for invariant mass fitting and signal yield extraction. The scripts 'spectra_ks_corr_low_cut0.C', 'spectra_ks_corr_high_cut0.C', and 'spectra_ks_corr_all_cut0.C' is for obtaining the pT spectra and yields, one should run them one after another.(cut0 is only for rapidly bin -1.75 to -1.5, one need to change the rapidity bin i.e. 0.25unit to get the spectra at other rapidity bins)
+one should run them one after another.
+'la' directory is the code for Lambda , one needs to download both the histo.root (from step 2) and weight*txt (from step 4) to 'output' subdirectory. The script 'draws_la_cut0.C' is for invariant mass fitting and signal yield extraction. The scripts 'spectra_la_corr_low_cut0.C', 'spectra_la_corr_high_cut0.C', and 'spectra_la_corr_all_cut0.C' is for obtaining the pT spectra and yields, one should run them one after another.(cut0 is only for rapidly bin -1.75 to -1.5, one need to change the rapidity bin i.e. 0.25unit to get the spectra at other rapidity bins)
+
+For systematic errors, one should change the analysis cuts, and check the variations of pT spectra, see analysis note for details.
+
